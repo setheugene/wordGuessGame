@@ -11,12 +11,13 @@ var letter = {func: computerLetters[Math.floor(Math.random() * computerLetters.l
 console.log(letter);
 
 window.onload = function() {
+  
 
   document.getElementById("currentLetter-text").style.cssText= "display: none";
 
   document.getElementById("wins-text").innerText = wins;
 
-  
+  var guessesRemainingText = document.getElementById("number-text");
 
   document.onkeyup = function(event) {
     var userInput = event.key;
@@ -29,8 +30,6 @@ window.onload = function() {
       document.getElementById("blank-text").style.backgroundColor= "green";
       var blankText = document.getElementById("blank-text").innerText = userInput;
       hasWon = true;
-      //add one
-      alert ("You Won. Press 'Space' to Continue");
       console.log(wins);
       wins++;
       winsText.textContent = "wins: " + wins;
@@ -47,7 +46,8 @@ window.onload = function() {
       hasWon = false;
       letter = {func: computerLetters[Math.floor(Math.random() * computerLetters.length)]}
     console.log(letter);
-    guessesRemainingText.textContent = 10;
+    guessesRemaining = 10;
+    wins = "wins " + 0;
     }
 
 
@@ -55,7 +55,7 @@ window.onload = function() {
     else if (userInput !== letter.func && event.keyCode !== 32) {
       document.getElementById("blank-text").style.cssText= "display: reset";
       document.getElementById("currentLetter-text").style.cssText= "display: none";
-      var blankText = document.getElementById("lettersGuessed-text").innerText += "," + userInput;
+      var blankText = document.getElementById("lettersGuessed-text").innerText += userInput + ",";
       if (guessesRemaining === 0) {
         alert ("You Lose, Press 'Space' to Reset.");
       }
@@ -74,7 +74,7 @@ window.onload = function() {
   
   var winsText = document.getElementById("wins-text");
   var blankText = document.getElementById("blank-text");
-  var guessesRemainingText = document.getElementById("number-text");
+  
   var userInput = document.getElementById("lettersGuessed-text");
 
 
